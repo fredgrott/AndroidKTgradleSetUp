@@ -3,6 +3,9 @@
 buildscript {
     ext.kotlin_version = '1.2.61'
     repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
         google()
         jcenter()
     }
@@ -11,6 +14,11 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+
+        // gradle plugins go below here
+        classpath "gradle.plugin.io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.0.0.RC8"
+        classpath "com.diffplug.spotless:spotless-plugin-gradle:3.14.0"
+
     }
 }
 
@@ -19,6 +27,12 @@ allprojects {
         google()
         jcenter()
     }
+}
+
+ext {
+    compileSdkVersion = 28
+
+    supportLibVersion = "26.0.0-alpha1"
 }
 
 task clean(type: Delete) {
